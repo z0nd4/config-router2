@@ -1,0 +1,34 @@
+Building configuration...
+
+Current configuration : 1677 bytes
+!
+version 17.16
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname router2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition clab-mgmt
+ description clab-mgmt
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+no aaa new-model
+!
+!
+!
+!
+!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nno ip domain lookup\r\nip domain name lab\r\nip cef\r\nlogin on-success log\r\nipv6 unicast-routing\r\nipv6 cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory free low-watermark processor 53768\r\n!\r\n!\r\nspanning-tree mode rapid-pvst\r\n!\r\n!\r\nusername admin privilege 15 secret 9 $9$pYI2CtF4OaCBCk$xIxY0Z5DShLi2AkOI8QODGyiAc6uaV5cECukOFlaVgg\r\n!
+!
+!
+!
+!
+! \r\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\ninterface Ethernet0/0\r\n description clab-mgmt\r\n vrf forwarding clab-mgmt\r\n ip address 172.20.30.21 255.255.255.0\r\n!\ninterface Ethernet0/1\r\n description APPs\r\n ip address 100.100.3.254 255.255.255.0\r\n!\ninterface Ethernet0/2\r\n description router2\r\n ip address 100.100.2.2 255.255.255.0\r\n!\ninterface Ethernet0/3\r\n no ip address\r\n shutdown\r\n!\r\nrouter rip\r\n network 100.0.0.0\r\n no auto-summary\r\n!\r\nip forward-protocol nd\r\nip forward-protocol udp\r\n!\r\n!\r\nip http server\r\nip http secure-server\r\nip route vrf clab-mgmt 0.0.0.0 0.0.0.0 Ethernet0/0 172.20.30.1\r\nip ssh bulk-mode 131072\r\nno logging btrace\r\nlogging trap debugging\r\nlogging origin-id hostname\r\nlogging source-interface Ethernet0/0 vrf clab-mgmt\r\nlogging host 172.20.30.101 vrf clab-mgmt\r\nipv6 route vrf clab-mgmt ::/0 Ethernet0/0\r\n!\r\nsnmp-server community public RO\r\nsnmp-server trap-source Ethernet0/0\r\nsnmp-server source-interface informs Ethernet0/0\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\nline con 0\r\n logging synchronous\r\nline aux 0\r\nline vty 0 4\r\n login local\r\n transport input ssh\r\n!\r\n!\r\n!\r\n!\r\nend
