@@ -1,6 +1,4 @@
-ip vrf VRF_MGMT_29
- description VRF para gestion con ID 29
- rd 65002:29
- route-target export 65002:29
- route-target import 65002:29
- !
+ip vrf app-test
+ rd 1111:1111
+ address-family ipv4
+ exit-address-family
